@@ -1,9 +1,6 @@
 <template>
   <div class="homepage">
     <div>
-      <!--  <button @click="getPublicsAlbums" v-if="albumsPublics !== []">
-        Récupérer les albums
-      </button> -->
       <div class="albums container">
         <div class="albums-grid" id="albums-grid">
           <article
@@ -23,7 +20,10 @@
             <div class="informations">
               <p class="info">{{ album.artist }}</p>
               <p class="info">{{ album.name }}</p>
-              <p class="info">{{ album.style }}</p>
+              <p class="info">
+                {{ album.style.slice(0, 15) }}
+                <span v-if="album.style.length > 15">...</span>
+              </p>
               <p class="info">{{ album.year }}</p>
             </div>
 

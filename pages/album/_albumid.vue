@@ -32,6 +32,7 @@
         </p>
       </div>
     </article>
+    <button @click="deleteAlbum" class="btn-delete">Supprimer</button>
   </div>
 </template>
 
@@ -47,7 +48,18 @@ export default {
   async fetch() {
     await this.getAlbum()
   },
+
   methods: {
+    async deleteAlbum(e) {
+      e.preventDefault()
+      const data = axios.delete(
+        `http://localhost:5000/album/${this.$route.params.id}`
+      )
+      const result = await data
+      this.album = result.data
+      console.log(result.data)
+      redirect('/')
+    },
     async getAlbum() {
       const data = axios.get(
         `http://localhost:5000/album/${this.$route.params.id}`
@@ -63,6 +75,7 @@ export default {
 
 <style lang="scss">
 .btn-back {
+  margin-left: 32px;
   align-self: flex-start;
   margin-bottom: 32px;
   text-align: center;
@@ -77,6 +90,27 @@ export default {
   padding: 6px 14px;
 }
 .btn-back:hover {
+  background-color: rgb(138, 36, 36);
+  transition: 0.3s;
+}
+.btn-delete {
+  margin: auto;
+  margin-bottom: 32px;
+  margin-top: 32px;
+
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 30px;
+  color: white;
+  background-color: transparent;
+  border: 1px solid red;
+
+  border-radius: 4px;
+  text-decoration: none;
+  padding: 6px 14px;
+}
+.btn-delete:hover {
   background-color: rgb(138, 36, 36);
   transition: 0.3s;
 }

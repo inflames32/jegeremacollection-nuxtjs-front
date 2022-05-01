@@ -10,6 +10,7 @@
 <script>
 export default {
   name: 'Header',
+  data() {},
 }
 </script>
 
@@ -29,8 +30,23 @@ export default {
   }
 }
 .nav-link {
+  margin-left: 32px;
+  align-self: flex-start;
+  margin-bottom: 32px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 30px;
   color: white;
+  background-color: green;
+  border: none;
+  border-radius: 4px;
   text-decoration: none;
+  padding: 6px 14px;
+}
+.nav-link:hover {
+  background-color: rgb(16, 70, 16);
+  transition: 0.3s;
 }
 
 .logo {
