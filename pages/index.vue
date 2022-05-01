@@ -1,6 +1,8 @@
 <template>
   <div class="homepage">
     <div>
+      <button class="btn-back" @click="getNewAlbum">Get New Album</button>
+
       <div class="albums container">
         <div class="albums-grid" id="albums-grid">
           <article
@@ -34,11 +36,30 @@
               Détails De L'album
             </NuxtLink>
           </article>
+
+          <article class="albums" v-show="newAlbum" v-for="item,index in newAlbum" :key="index">
+          
+              <div class="albums-cover">
+                 <img
+                src="@/assets/images/376819.png"
+                alt="album cover img"
+                class="cover"
+                v-if="item.image === ''"
+              />
+                <img :src="`${item.image[index].size}`" alt="" class="cover" />
+            
+              </div>
+              <div class="informations">               
+                <p class="info">{{ item.artist }}</p>
+                <p class="info">{{ item.name }}</p>
+                <p class="info">{{ item.url }}</p>
+                <p class="info">{{ item.tags.tag[index].name }}</p>
+                
+              </div>
+            </article>
+          </div>
         </div>
       </div>
-      <!--  <button class="addAlbum">
-        <img src="@/assets/images/plus-svgrepo-com.svg" alt="" />
-      </button> -->
     </div>
   </div>
 </template>
@@ -50,6 +71,7 @@ export default {
   data() {
     return {
       albumsPublics: [],
+      newAlbum: [],
     }
   },
   async fetch() {
@@ -67,8 +89,23 @@ export default {
       result.data.forEach((album) => {
         this.albumsPublics.push(album)
       })
-
       console.log(this.albumsPublics)
+    },
+    async getNewAlbum() {
+      console.log('ici')
+      const data = axios.get(
+        `http://ws.audioscrobbler.com/2.0/?method=album.getinfo
+      &api_key=5baf82fb23149e384f5deda028266817
+      &artist=Countless+Skies
+      &album=New+Dawn      
+      &lang=fr
+      &releaseDate
+      &format=json`
+      )
+      const result = await data
+      console.log(result.data.album)
+      this.newAlbum.push(result.data.album)
+      console.log(this.newAlbum)
     },
   },
 }

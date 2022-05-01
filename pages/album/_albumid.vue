@@ -76,6 +76,7 @@ export default {
 <style lang="scss">
 .btn-back {
   margin-left: 32px;
+  margin-top: 32px;
   align-self: flex-start;
   margin-bottom: 32px;
   text-align: center;
@@ -95,8 +96,8 @@ export default {
 }
 .btn-delete {
   margin: auto;
-  margin-bottom: 32px;
-  margin-top: 32px;
+  margin-bottom: 16px;
+  margin-top: 16px;
 
   text-align: center;
   font-size: 16px;
@@ -161,8 +162,11 @@ export default {
   }
 }
 .single-album-content {
-  margin-top: 30px;
-  margin-left: 30px;
+  @media (max-width: 750px) {
+    margin: auto;
+  }
+  margin: auto;
+
   color: white;
   font-size: 30px;
   .categorie {
