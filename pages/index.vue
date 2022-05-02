@@ -2,7 +2,6 @@
   <div class="homepage">
     <div>
       <button class="btn-back" @click="getNewAlbum">Get New Album</button>
-
       <div class="albums container">
         <div class="albums-grid" id="albums-grid">
           <article
@@ -37,27 +36,28 @@
             </NuxtLink>
           </article>
 
-          <article class="albums" v-show="newAlbum" v-for="item,index in newAlbum" :key="index">
-          
-              <div class="albums-cover">
-                 <img
+          <article
+            class="albums"
+            v-show="newAlbum"
+            v-for="(item, index) in newAlbum"
+            :key="index"
+          >
+            <div class="albums-cover">
+              <img
                 src="@/assets/images/376819.png"
                 alt="album cover img"
                 class="cover"
                 v-if="item.image === ''"
               />
-                <img :src="`${item.image[index].size}`" alt="" class="cover" />
-            
-              </div>
-              <div class="informations">               
-                <p class="info">{{ item.artist }}</p>
-                <p class="info">{{ item.name }}</p>
-                <p class="info">{{ item.url }}</p>
-                <p class="info">{{ item.tags.tag[index].name }}</p>
-                
-              </div>
-            </article>
-          </div>
+              <img :src="`${item.image[index].size}`" alt="" class="cover" />
+            </div>
+            <div class="informations">
+              <p class="info">{{ item.artist }}</p>
+              <p class="info">{{ item.name }}</p>
+              <p class="info">{{ item.url }}</p>
+              <p class="info">{{ item.tags.tag[index].name }}</p>
+            </div>
+          </article>
         </div>
       </div>
     </div>
@@ -68,6 +68,16 @@
 import axios from 'axios'
 
 export default {
+  head() {
+    return {
+      meta: [
+        {
+          'http-equiv': 'Content-Security-Policy',
+          content: 'upgrade-insecure-requests',
+        },
+      ],
+    }
+  },
   data() {
     return {
       albumsPublics: [],
@@ -102,6 +112,7 @@ export default {
       &releaseDate
       &format=json`
       )
+      console.log(data)
       const result = await data
       console.log(result.data.album)
       this.newAlbum.push(result.data.album)
