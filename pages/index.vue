@@ -94,7 +94,7 @@ export default {
     async getNewAlbum() {
       console.log('ici')
       const data = axios.get(
-        `http://ws.audioscrobbler.com/2.0/?method=album.getinfo
+        `https://ws.audioscrobbler.com/2.0/?method=album.getinfo
       &api_key=5baf82fb23149e384f5deda028266817
       &artist=Countless+Skies
       &album=New+Dawn      
